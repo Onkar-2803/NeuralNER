@@ -44,10 +44,15 @@ def load_embeddings(file_name):
 
 	wv = []
 	dimension = 0
+# 	check if dimension is changing
 	with codecs.open(file_name, 'r', 'utf-8',errors='ignore') as f_in:
 		# read the file line by line
 		for line in f_in:
+# 			check if line_number and line are printing fine
+# 			skip the line which doesn't have 
 			line = line.strip()
+			if(len(line.split(' ')) != 301):
+				continue
 			# if line is not empty
 			if line:
 				vocabulary = line.split(' ')[0]
@@ -58,7 +63,7 @@ def load_embeddings(file_name):
 					reverseDict.append(vocabulary.lower())
 
 					if dimension == 0:
-						dimension = len(line.split(' ')[1:])
+						dimension = len(line.split(' ')[1:]) #Why not working 
 
 					if dimension != len(line.split(' ')[1:]):
 						print(line)
@@ -68,9 +73,11 @@ def load_embeddings(file_name):
 						temp.append(float(i))
 
 					wv.append(temp)
+					#Check len of temp(should be 300)
 
 	# convert embedding list to numpy array
 	wv_np = np.array(wv)
+	#(N * 300)
 
 	# add unknown word to dictionary
 	dictionary["<unk>"] = len(dictionary)
