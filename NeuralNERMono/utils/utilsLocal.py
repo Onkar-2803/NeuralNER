@@ -44,12 +44,10 @@ def load_embeddings(file_name):
 
 	wv = []
 	dimension = 0
-# 	check if dimension is changing
+	
 	with codecs.open(file_name, 'r', 'utf-8',errors='ignore') as f_in:
-		# read the file line by line
+
 		for line in f_in:
-# 			check if line_number and line are printing fine
-# 			skip the line which doesn't have 
 			line = line.strip()
 			if(len(line.split(' ')) != 301):
 				continue
